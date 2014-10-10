@@ -76,9 +76,19 @@ _rustc()
 			COMPREPLY=( $( compgen -W "${helpopts}" -- "$cur" ) )
 			return 0
 			;;
-		*)
-			_compopt_o_filenames
-			COMPREPLY=( $( compgen -d -- "$cur" ) $( compgen -f -X "!*.rs" -- "$cur" ) )
 	esac
+
+	_expand || return 0
+
+	xspec="*.rs"
+	case $prev in
+	    $xspec)
+		return 0
+		;;
+	esac
+
+	_compopt_o_filenames
+	COMPREPLY=( $( compgen -d -- "$cur" ) $( compgen -f -X "!$xspec" -- "$cur" ) )
+
 } &&
 complete -F _rustc rustc
