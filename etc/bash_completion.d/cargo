@@ -2,6 +2,7 @@
 # Bash completion for cargo
 #
 
+have cargo &&
 _cargo()
 {
     local cur prev helpopts commands comopts comstring
@@ -19,6 +20,14 @@ _cargo()
 	return 0
     fi;
 
-    COMPREPLY=( $( compgen -W "${comstring} ${helpopts}" -- "$cur" ) )
-}
+    case $prev in
+	help)
+	    COMPREPLY=( $( compgen -W "${comstring}" -- "$cur" ) )
+	    return 0
+	    ;;
+    esac
+
+    COMPREPLY=( $( compgen -W "${comstring} ${helpopts} help" -- "$cur" ) )
+    return 0
+} &&
 complete -F _cargo cargo
