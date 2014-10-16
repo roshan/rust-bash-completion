@@ -10,7 +10,7 @@ SRC=$(addprefix $(SRCDIR)/, $(SCRIPTS))
 
 install: $(OBJ)
 
-$(OBJ): $(SRC)
+$(DSTDIR)/%: $(SRCDIR)/%
 	cp $< $@
 
 uninstall:
