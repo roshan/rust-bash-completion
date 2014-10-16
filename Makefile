@@ -1,11 +1,17 @@
-DST=/etc/bash_completion.d/rustc
+DSTDIR=/etc/bash_completion.d
+SRCDIR=etc/bash_completion.d
+
+SCRIPTS=rustc cargo
+
+OBJ=$(addprefix $(DSTDIR)/, $(SCRIPTS))
+SRC=$(addprefix $(SRCDIR)/, $(SCRIPTS))
 
 .PHONY: install uninstall
 
-install: $(DST) 
+install: $(OBJ)
 
-$(DST): etc/bash_completion.d/rustc
+$(OBJ): $(SRC)
 	cp $< $@
 
 uninstall:
-	rm $(DST)
+	rm $(OBJ)

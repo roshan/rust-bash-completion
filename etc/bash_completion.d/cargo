@@ -1,0 +1,24 @@
+#!bash
+# Bash completion for cargo
+#
+
+_cargo()
+{
+    local cur prev helpopts commands comopts comstring
+
+    commands=( "build" "clean" "doc" "new" "run" "test" "bench" "update" )
+    comstring=" build clean doc new run test bench update"
+
+    COMPREPLY=()
+    _get_comp_words_by_ref cur prev
+    helpopts=`_parse_help ${COMP_WORDS[0]}`
+
+    if [[ " ${comstring} " =~ " ${prev} " ]]; then
+	comopts=`_parse_help "cargo ${prev}"`
+	COMPREPLY=( $( compgen -W "${comopts}" -- "$cur" ) )
+	return 0
+    fi;
+
+    COMPREPLY=( $( compgen -W "${comstring} ${helpopts}" -- "$cur" ) )
+}
+complete -F _cargo cargo
