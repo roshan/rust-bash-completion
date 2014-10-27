@@ -5,9 +5,8 @@
 have cargo &&
 _cargo()
 {
-    local cur prev helpopts commands comopts comstring
+    local cur prev helpopts comopts comstring
 
-    commands=( "build" "clean" "doc" "new" "run" "test" "bench" "update" )
     comstring=" build clean doc new run test bench update"
 
     COMPREPLY=()
