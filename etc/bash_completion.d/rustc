@@ -2,7 +2,6 @@
 # Bash completion for rustc
 #
 
-have rustc &&
 _rustc()
 {
     local cur prev helpopts codegenopts warnopts debugopts
@@ -90,5 +89,5 @@ _rustc()
 	_compopt_o_filenames
 	COMPREPLY=( $( compgen -d -- "$cur" ) $( compgen -f -X "!$xspec" -- "$cur" ) )
 
-} &&
+}
 complete -F _rustc rustc
